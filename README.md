@@ -20,7 +20,7 @@ Use the SPM string to easily include the dependendency in your `Package.swift` f
 .package(url: "https://github.com/fpseverino/fluent-wallet.git", branch: "main")
 ```
 
-and add it to your target's dependencies:
+and add the product you want to use to your target's dependencies:
 
 ```swift
 .product(name: "FluentPasses", package: "fluent-wallet")
