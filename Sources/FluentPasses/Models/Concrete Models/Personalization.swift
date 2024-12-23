@@ -8,6 +8,10 @@ final public class Personalization: PersonalizationModel, @unchecked Sendable {
     @ID(custom: .id)
     public var id: Int?
 
+    /// The pass this personalization info is associated with.
+    @Parent(key: Personalization.FieldKeys.passID)
+    public var pass: Pass
+
     /// The user’s full name, as entered by the user.
     @OptionalField(key: Personalization.FieldKeys.fullName)
     public var fullName: String?
@@ -50,6 +54,11 @@ public struct CreatePersonalization: AsyncMigration {
     public func prepare(on database: any Database) async throws {
         try await database.schema(Personalization.FieldKeys.schemaName)
             .field(.id, .int, .identifier(auto: true))
+            .field(
+                Personalization.FieldKeys.passID, .uuid, .required,
+                .references(Pass.FieldKeys.schemaName, .id, onDelete: .cascade)
+            )
+            .unique(on: Personalization.FieldKeys.passID)
             .field(Personalization.FieldKeys.fullName, .string)
             .field(Personalization.FieldKeys.givenName, .string)
             .field(Personalization.FieldKeys.familyName, .string)
@@ -70,6 +79,7 @@ public struct CreatePersonalization: AsyncMigration {
 extension Personalization {
     enum FieldKeys {
         static let schemaName = "personalization_info"
+        static let passID = FieldKey(stringLiteral: "pass_id")
         static let fullName = FieldKey(stringLiteral: "full_name")
         static let givenName = FieldKey(stringLiteral: "given_name")
         static let familyName = FieldKey(stringLiteral: "family_name")

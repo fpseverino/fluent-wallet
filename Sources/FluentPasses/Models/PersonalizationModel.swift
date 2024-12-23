@@ -2,6 +2,11 @@ import FluentKit
 
 /// Represents the `Model` that stores user personalization info.
 public protocol PersonalizationModel: Model where IDValue == Int {
+    associatedtype PassType: PassModel
+
+    /// The pass this personalization info is associated with.
+    var pass: PassType { get set }
+
     /// The user’s full name, as entered by the user.
     var fullName: String? { get set }
 
@@ -40,6 +45,16 @@ extension PersonalizationModel {
         }
 
         return id
+    }
+
+    public var _$pass: Parent<PassType> {
+        guard let mirror = Mirror(reflecting: self).descendant("_pass"),
+            let pass = mirror as? Parent<PassType>
+        else {
+            fatalError("pass property must be declared using @Parent")
+        }
+
+        return pass
     }
 
     public var _$fullName: OptionalField<String> {

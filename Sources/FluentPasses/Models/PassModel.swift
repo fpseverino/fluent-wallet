@@ -6,8 +6,6 @@ import Foundation
 ///
 /// Uses a UUID so people can't easily guess pass serial numbers.
 public protocol PassModel: Model where IDValue == UUID {
-    associatedtype PersonalizationType: PersonalizationModel
-
     /// The pass type identifier that’s registered with Apple.
     var typeIdentifier: String { get set }
 
@@ -16,9 +14,6 @@ public protocol PassModel: Model where IDValue == UUID {
 
     /// The authentication token to use with the web service in the `webServiceURL` key.
     var authenticationToken: String { get set }
-
-    /// The user personalization info.
-    var personalization: PersonalizationType? { get set }
 
     /// The designated initializer.
     /// - Parameters:
@@ -66,15 +61,5 @@ extension PassModel {
         }
 
         return authenticationToken
-    }
-
-    public var _$personalization: OptionalParent<PersonalizationType> {
-        guard let mirror = Mirror(reflecting: self).descendant("_personalization"),
-            let personalization = mirror as? OptionalParent<PersonalizationType>
-        else {
-            fatalError("personalization property must be declared using @OptionalParent")
-        }
-
-        return personalization
     }
 }

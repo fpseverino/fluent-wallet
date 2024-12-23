@@ -16,11 +16,8 @@ struct FluentPassesTests {
 
         let typeIdentifier = "Test Type Identifier"
         let authenticationToken = "Test Authentication Token"
-        let personalization = Personalization()
-        personalization._$id.value = 1
 
         let pass = Pass(typeIdentifier: typeIdentifier, authenticationToken: authenticationToken)
-        pass.$personalization.id = personalization.id!
         test.append([
             TestOutput(pass)
         ])
@@ -28,7 +25,6 @@ struct FluentPassesTests {
         let fetchedPass = try #require(await Pass.query(on: test.db).first())
         #expect(fetchedPass._$typeIdentifier.value == typeIdentifier)
         #expect(fetchedPass._$authenticationToken.value == authenticationToken)
-        #expect(fetchedPass._$personalization.id == personalization.id)
 
         try await migration.revert(on: test.db)
     }
@@ -62,6 +58,12 @@ struct FluentPassesTests {
         let migration = CreatePersonalization()
         try await migration.prepare(on: test.db)
 
+        let typeIdentifier = "Test Type Identifier"
+        let authenticationToken = "Test Authentication Token"
+
+        let pass = Pass(typeIdentifier: typeIdentifier, authenticationToken: authenticationToken)
+        pass._$id.value = UUID()
+
         let fullName = "Test Name"
         let givenName = String(fullName.prefix(4))
         let familyName = String(fullName.suffix(4))
@@ -71,6 +73,7 @@ struct FluentPassesTests {
         let phoneNumber = "Test Phone Number"
 
         let personalization = Personalization()
+        personalization.$pass.id = pass.id!
         personalization.fullName = fullName
         personalization.givenName = givenName
         personalization.familyName = familyName
@@ -83,6 +86,7 @@ struct FluentPassesTests {
         ])
 
         let fetchedPersonalization = try #require(await Personalization.query(on: test.db).first())
+        #expect(fetchedPersonalization._$pass.id == pass.id)
         #expect(fetchedPersonalization._$fullName.value == fullName)
         #expect(fetchedPersonalization._$givenName.value == givenName)
         #expect(fetchedPersonalization._$familyName.value == familyName)

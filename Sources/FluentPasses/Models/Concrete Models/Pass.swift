@@ -27,10 +27,6 @@ final public class Pass: PassModel, @unchecked Sendable {
     @Field(key: Pass.FieldKeys.authenticationToken)
     public var authenticationToken: String
 
-    /// The user personalization info.
-    @OptionalParent(key: Pass.FieldKeys.personalizationID)
-    public var personalization: Personalization?
-
     public init() {}
 
     public init(typeIdentifier: String, authenticationToken: String) {
@@ -46,11 +42,6 @@ public struct CreatePass: AsyncMigration {
             .field(Pass.FieldKeys.updatedAt, .datetime, .required)
             .field(Pass.FieldKeys.typeIdentifier, .string, .required)
             .field(Pass.FieldKeys.authenticationToken, .string, .required)
-            .field(
-                Pass.FieldKeys.personalizationID, .int,
-                .references(Personalization.FieldKeys.schemaName, .id)
-            )
-            .unique(on: Pass.FieldKeys.personalizationID)
             .create()
     }
 
@@ -67,6 +58,5 @@ extension Pass {
         static let updatedAt = FieldKey(stringLiteral: "updated_at")
         static let typeIdentifier = FieldKey(stringLiteral: "type_identifier")
         static let authenticationToken = FieldKey(stringLiteral: "authentication_token")
-        static let personalizationID = FieldKey(stringLiteral: "personalization_id")
     }
 }
