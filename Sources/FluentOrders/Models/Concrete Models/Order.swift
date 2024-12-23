@@ -29,17 +29,17 @@ final public class Order: OrderModel, @unchecked Sendable {
     @Field(key: Order.FieldKeys.authenticationToken)
     public var authenticationToken: String
 
-    public required init() {}
+    public init() {}
 
-    public required init(typeIdentifier: String, authenticationToken: String) {
+    public init(typeIdentifier: String, authenticationToken: String) {
         self.typeIdentifier = typeIdentifier
         self.authenticationToken = authenticationToken
     }
 }
 
-extension Order: AsyncMigration {
+public struct CreateOrder: AsyncMigration {
     public func prepare(on database: any Database) async throws {
-        try await database.schema(Self.schema)
+        try await database.schema(Order.FieldKeys.schemaName)
             .id()
             .field(Order.FieldKeys.createdAt, .datetime, .required)
             .field(Order.FieldKeys.updatedAt, .datetime, .required)
@@ -49,8 +49,10 @@ extension Order: AsyncMigration {
     }
 
     public func revert(on database: any Database) async throws {
-        try await database.schema(Self.schema).delete()
+        try await database.schema(Order.FieldKeys.schemaName).delete()
     }
+
+    public init() {}
 }
 
 extension Order {

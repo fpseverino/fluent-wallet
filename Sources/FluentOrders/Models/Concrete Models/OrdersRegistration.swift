@@ -3,9 +3,6 @@ import FluentWallet
 
 /// The `Model` that stores orders registrations.
 final public class OrdersRegistration: OrdersRegistrationModel, @unchecked Sendable {
-    public typealias OrderType = Order
-    public typealias DeviceType = Device
-
     /// The schema name of the orders registration model.
     public static let schema = OrdersRegistration.FieldKeys.schemaName
 
@@ -14,33 +11,35 @@ final public class OrdersRegistration: OrdersRegistrationModel, @unchecked Senda
 
     /// The device for this registration.
     @Parent(key: OrdersRegistration.FieldKeys.deviceID)
-    public var device: DeviceType
+    public var device: Device
 
     /// The order for this registration.
     @Parent(key: OrdersRegistration.FieldKeys.orderID)
-    public var order: OrderType
+    public var order: Order
 
     public init() {}
 }
 
-extension OrdersRegistration: AsyncMigration {
+public struct CreateOrdersRegistration: AsyncMigration {
     public func prepare(on database: any Database) async throws {
-        try await database.schema(Self.schema)
+        try await database.schema(OrdersRegistration.FieldKeys.schemaName)
             .field(.id, .int, .identifier(auto: true))
             .field(
                 OrdersRegistration.FieldKeys.deviceID, .int, .required,
-                .references(DeviceType.schema, .id, onDelete: .cascade)
+                .references(Device.FieldKeys.schemaName, .id, onDelete: .cascade)
             )
             .field(
                 OrdersRegistration.FieldKeys.orderID, .uuid, .required,
-                .references(OrderType.schema, .id, onDelete: .cascade)
+                .references(Order.FieldKeys.schemaName, .id, onDelete: .cascade)
             )
             .create()
     }
 
     public func revert(on database: any Database) async throws {
-        try await database.schema(Self.schema).delete()
+        try await database.schema(OrdersRegistration.FieldKeys.schemaName).delete()
     }
+
+    public init() {}
 }
 
 extension OrdersRegistration {

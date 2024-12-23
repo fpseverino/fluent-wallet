@@ -24,9 +24,9 @@ final public class Device: DeviceModel, @unchecked Sendable {
     public init() {}
 }
 
-extension Device: AsyncMigration {
+public struct CreateDevice: AsyncMigration {
     public func prepare(on database: any Database) async throws {
-        try await database.schema(Self.schema)
+        try await database.schema(Device.FieldKeys.schemaName)
             .field(.id, .int, .identifier(auto: true))
             .field(Device.FieldKeys.pushToken, .string, .required)
             .field(Device.FieldKeys.libraryIdentifier, .string, .required)
@@ -35,13 +35,15 @@ extension Device: AsyncMigration {
     }
 
     public func revert(on database: any Database) async throws {
-        try await database.schema(Self.schema).delete()
+        try await database.schema(Device.FieldKeys.schemaName).delete()
     }
+
+    public init() {}
 }
 
 extension Device {
-    enum FieldKeys {
-        static let schemaName = "devices"
+    package enum FieldKeys {
+        package static let schemaName = "devices"
         static let pushToken = FieldKey(stringLiteral: "push_token")
         static let libraryIdentifier = FieldKey(stringLiteral: "library_identifier")
     }

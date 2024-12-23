@@ -5,8 +5,6 @@ import Foundation
 ///
 /// Uses a UUID so people can't easily guess pass serial numbers.
 final public class Pass: PassModel, @unchecked Sendable {
-    public typealias PersonalizationType = Personalization
-
     /// The schema name of the pass model.
     public static let schema = Pass.FieldKeys.schemaName
 
@@ -31,34 +29,36 @@ final public class Pass: PassModel, @unchecked Sendable {
 
     /// The user personalization info.
     @OptionalParent(key: Pass.FieldKeys.personalizationID)
-    public var personalization: PersonalizationType?
+    public var personalization: Personalization?
 
-    public required init() {}
+    public init() {}
 
-    public required init(typeIdentifier: String, authenticationToken: String) {
+    public init(typeIdentifier: String, authenticationToken: String) {
         self.typeIdentifier = typeIdentifier
         self.authenticationToken = authenticationToken
     }
 }
 
-extension Pass: AsyncMigration {
+public struct CreatePass: AsyncMigration {
     public func prepare(on database: any Database) async throws {
-        try await database.schema(Self.schema)
+        try await database.schema(Pass.FieldKeys.schemaName)
             .id()
             .field(Pass.FieldKeys.updatedAt, .datetime, .required)
             .field(Pass.FieldKeys.typeIdentifier, .string, .required)
             .field(Pass.FieldKeys.authenticationToken, .string, .required)
             .field(
                 Pass.FieldKeys.personalizationID, .int,
-                .references(PersonalizationType.schema, .id)
+                .references(Personalization.FieldKeys.schemaName, .id)
             )
             .unique(on: Pass.FieldKeys.personalizationID)
             .create()
     }
 
     public func revert(on database: any Database) async throws {
-        try await database.schema(Self.schema).delete()
+        try await database.schema(Pass.FieldKeys.schemaName).delete()
     }
+
+    public init() {}
 }
 
 extension Pass {

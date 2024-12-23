@@ -46,9 +46,9 @@ final public class Personalization: PersonalizationModel, @unchecked Sendable {
     public init() {}
 }
 
-extension Personalization: AsyncMigration {
+public struct CreatePersonalization: AsyncMigration {
     public func prepare(on database: any Database) async throws {
-        try await database.schema(Self.schema)
+        try await database.schema(Personalization.FieldKeys.schemaName)
             .field(.id, .int, .identifier(auto: true))
             .field(Personalization.FieldKeys.fullName, .string)
             .field(Personalization.FieldKeys.givenName, .string)
@@ -61,8 +61,10 @@ extension Personalization: AsyncMigration {
     }
 
     public func revert(on database: any Database) async throws {
-        try await database.schema(Self.schema).delete()
+        try await database.schema(Personalization.FieldKeys.schemaName).delete()
     }
+
+    public init() {}
 }
 
 extension Personalization {

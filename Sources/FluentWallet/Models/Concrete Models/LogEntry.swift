@@ -19,17 +19,19 @@ final public class LogEntry: LogEntryModel, @unchecked Sendable {
     public init() {}
 }
 
-extension LogEntry: AsyncMigration {
+public struct CreateLogEntry: AsyncMigration {
     public func prepare(on database: any Database) async throws {
-        try await database.schema(Self.schema)
+        try await database.schema(LogEntry.FieldKeys.schemaName)
             .field(.id, .int, .identifier(auto: true))
             .field(LogEntry.FieldKeys.message, .string, .required)
             .create()
     }
 
     public func revert(on database: any Database) async throws {
-        try await database.schema(Self.schema).delete()
+        try await database.schema(LogEntry.FieldKeys.schemaName).delete()
     }
+
+    public init() {}
 }
 
 extension LogEntry {
