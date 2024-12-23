@@ -38,21 +38,24 @@ let package = Package(
         .testTarget(
             name: "FluentWalletTests",
             dependencies: [
-                .target(name: "FluentWallet")
+                .target(name: "FluentWallet"),
+                .product(name: "XCTFluent", package: "fluent-kit"),
             ],
             swiftSettings: swiftSettings
         ),
         .testTarget(
             name: "FluentPassesTests",
             dependencies: [
-                .target(name: "FluentPasses")
+                .target(name: "FluentPasses"),
+                .product(name: "XCTFluent", package: "fluent-kit"),
             ],
             swiftSettings: swiftSettings
         ),
         .testTarget(
             name: "FluentOrdersTests",
             dependencies: [
-                .target(name: "FluentOrders")
+                .target(name: "FluentOrders"),
+                .product(name: "XCTFluent", package: "fluent-kit"),
             ],
             swiftSettings: swiftSettings
         ),
