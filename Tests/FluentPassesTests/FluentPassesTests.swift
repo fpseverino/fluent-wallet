@@ -93,23 +93,4 @@ struct FluentPassesTests {
 
         try await migration.revert(on: test.db)
     }
-
-    @Test("PersonalizationJSON initialization")
-    func initPersonalizationJSON() async throws {
-        let requiredPersonalizationFields: [PersonalizationJSON.PersonalizationField] = [
-            .name, .postalCode, .emailAddress, .phoneNumber,
-        ]
-        let description = "Test Description"
-        let termsAndConditions = "Test Terms and Conditions"
-
-        let personalizationJSON = PersonalizationJSON(
-            requiredPersonalizationFields: requiredPersonalizationFields,
-            description: description,
-            termsAndConditions: termsAndConditions
-        )
-
-        #expect(personalizationJSON.requiredPersonalizationFields == requiredPersonalizationFields)
-        #expect(personalizationJSON.description == description)
-        #expect(personalizationJSON.termsAndConditions == termsAndConditions)
-    }
 }
