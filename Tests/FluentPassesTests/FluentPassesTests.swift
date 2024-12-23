@@ -36,6 +36,7 @@ struct FluentPassesTests {
 
         let device = Device()
         device._$id.value = 1
+        
         let pass = Pass()
         pass._$id.value = UUID()
 
@@ -94,6 +95,44 @@ struct FluentPassesTests {
         #expect(fetchedPersonalization._$postalCode.value == postalCode)
         #expect(fetchedPersonalization._$isoCountryCode.value == isoCountryCode)
         #expect(fetchedPersonalization._$phoneNumber.value == phoneNumber)
+
+        try await migration.revert(on: test.db)
+    }
+
+    @Test("PassesRegistrationModel `for` QueryBuilder")
+    func forQueryBuilder() async throws {
+        let migration = CreatePassesRegistration()
+        try await migration.prepare(on: test.db)
+
+        let libraryIdentifier = "Test Library Identifier"
+        let pushToken = "Test Push Token"
+        let device = Device(libraryIdentifier: libraryIdentifier, pushToken: pushToken)
+        device._$id.value = 1
+
+        let typeIdentifier = "Test Type Identifier"
+        let authenticationToken = "Test Authentication Token"
+        let pass = Pass(typeIdentifier: typeIdentifier, authenticationToken: authenticationToken)
+        pass._$id.value = UUID()
+
+        let passesRegistration = PassesRegistration()
+        passesRegistration.$device.id = device.id!
+        passesRegistration.$pass.id = pass.id!
+
+        test.append([
+            TestOutput(passesRegistration)
+        ])
+
+        let fetchedPassesRegistration = try #require(
+            await PassesRegistration
+                .for(
+                    deviceLibraryIdentifier: libraryIdentifier,
+                    typeIdentifier: typeIdentifier,
+                    on: test.db
+                )
+                .first()
+        )
+        #expect(fetchedPassesRegistration._$device.id == device.id)
+        #expect(fetchedPassesRegistration._$pass.id == pass.id)
 
         try await migration.revert(on: test.db)
     }

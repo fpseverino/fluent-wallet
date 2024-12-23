@@ -38,8 +38,6 @@ extension PassesRegistrationModel {
         Self.query(on: db)
             .join(parent: \._$pass)
             .join(parent: \._$device)
-            .with(\._$pass)
-            .with(\._$device)
             .filter(PassType.self, \._$typeIdentifier == typeIdentifier)
             .filter(DeviceType.self, \._$libraryIdentifier == deviceLibraryIdentifier)
     }

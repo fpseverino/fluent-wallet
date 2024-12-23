@@ -38,8 +38,6 @@ extension OrdersRegistrationModel {
         Self.query(on: db)
             .join(parent: \._$order)
             .join(parent: \._$device)
-            .with(\._$order)
-            .with(\._$device)
             .filter(OrderType.self, \._$typeIdentifier == typeIdentifier)
             .filter(DeviceType.self, \._$libraryIdentifier == deviceLibraryIdentifier)
     }
