@@ -36,7 +36,7 @@ struct FluentPassesTests {
 
         let device = Device()
         device._$id.value = 1
-        
+
         let pass = Pass()
         pass._$id.value = UUID()
 

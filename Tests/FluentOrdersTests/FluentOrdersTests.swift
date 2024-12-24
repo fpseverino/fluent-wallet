@@ -35,7 +35,7 @@ struct FluentOrdersTests {
 
         let device = Device()
         device._$id.value = 1
-        
+
         let order = Order()
         order._$id.value = UUID()
 
