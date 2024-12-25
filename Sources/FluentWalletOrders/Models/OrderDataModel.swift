@@ -17,7 +17,7 @@ public protocol OrderDataModel: Model {
     ///
     /// - Parameter db: The SQL database to query against.
     ///
-    /// - Returns: An object that conforms to ``OrderJSON/Properties``.
+    /// - Returns: An object that conforms to `OrderJSON.Properties`.
     ///
     /// > Tip: See the [`Order`](https://developer.apple.com/documentation/walletorders/order) object to understand the keys.
     func orderJSON(on db: any Database) async throws -> any OrderJSON.Properties

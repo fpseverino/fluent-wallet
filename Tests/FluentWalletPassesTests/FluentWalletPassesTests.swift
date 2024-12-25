@@ -1,12 +1,11 @@
-import FluentPasses
-import FluentWallet
+import FluentWalletPasses
 import Testing
 import XCTFluent
 
 import struct Foundation.UUID
 
-@Suite("FluentPasses Tests")
-struct FluentPassesTests {
+@Suite("FluentWalletPasses Tests")
+struct FluentWalletPassesTests {
     let test = ArrayTestDatabase()
 
     @Test("Pass Concrete Model")

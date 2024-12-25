@@ -1,4 +1,4 @@
-# ``FluentPasses``
+# ``FluentWalletPasses``
 
 A collection of Fluent models for managing passes for Apple Wallet.
 
@@ -21,7 +21,8 @@ This package provides a collection of Fluent protocol and concrete models, usefu
 - ``PassesRegistration``
 - ``Personalization``
 
-### DTOs
+### Migrations
 
-- ``PassJSON``
-- ``PersonalizationJSON``
+- ``CreatePass``
+- ``CreatePassesRegistration``
+- ``CreatePersonalization``

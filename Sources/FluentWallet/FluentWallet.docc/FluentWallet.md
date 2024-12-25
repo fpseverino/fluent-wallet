@@ -17,3 +17,8 @@ This package provides a collection of Fluent protocol and concrete models, usefu
 
 - ``Device``
 - ``LogEntry``
+
+### Migrations
+
+- ``CreateDevice``
+- ``CreateLogEntry``

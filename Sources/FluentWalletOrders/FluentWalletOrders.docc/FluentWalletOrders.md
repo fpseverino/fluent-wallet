@@ -1,4 +1,4 @@
-# ``FluentOrders``
+# ``FluentWalletOrders``
 
 A collection of Fluent models for managing orders for Apple Wallet.
 
@@ -19,6 +19,7 @@ This package provides a collection of Fluent protocol and concrete models, usefu
 - ``Order``
 - ``OrdersRegistration``
 
-### DTOs
+### Migrations
 
-- ``OrderJSON``
+- ``CreateOrder``
+- ``CreateOrdersRegistration``

@@ -7,8 +7,8 @@ let package = Package(
         .macOS(.v13)
     ],
     products: [
-        .library(name: "FluentPasses", targets: ["FluentPasses"]),
-        .library(name: "FluentOrders", targets: ["FluentOrders"]),
+        .library(name: "FluentWalletPasses", targets: ["FluentWalletPasses"]),
+        .library(name: "FluentWalletOrders", targets: ["FluentWalletOrders"]),
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/fluent-kit.git", from: "1.49.0"),
@@ -31,7 +31,7 @@ let package = Package(
             swiftSettings: swiftSettings
         ),
         .target(
-            name: "FluentPasses",
+            name: "FluentWalletPasses",
             dependencies: [
                 .target(name: "FluentWallet"),
                 .product(name: "WalletPasses", package: "swift-wallet"),
@@ -39,15 +39,15 @@ let package = Package(
             swiftSettings: swiftSettings
         ),
         .testTarget(
-            name: "FluentPassesTests",
+            name: "FluentWalletPassesTests",
             dependencies: [
-                .target(name: "FluentPasses"),
+                .target(name: "FluentWalletPasses"),
                 .product(name: "XCTFluent", package: "fluent-kit"),
             ],
             swiftSettings: swiftSettings
         ),
         .target(
-            name: "FluentOrders",
+            name: "FluentWalletOrders",
             dependencies: [
                 .target(name: "FluentWallet"),
                 .product(name: "WalletOrders", package: "swift-wallet"),
@@ -55,9 +55,9 @@ let package = Package(
             swiftSettings: swiftSettings
         ),
         .testTarget(
-            name: "FluentOrdersTests",
+            name: "FluentWalletOrdersTests",
             dependencies: [
-                .target(name: "FluentOrders"),
+                .target(name: "FluentWalletOrders"),
                 .product(name: "XCTFluent", package: "fluent-kit"),
             ],
             swiftSettings: swiftSettings

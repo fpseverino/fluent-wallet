@@ -1,12 +1,11 @@
-import FluentOrders
-import FluentWallet
+import FluentWalletOrders
 import Testing
 import XCTFluent
 
 import struct Foundation.UUID
 
-@Suite("FluentOrders Tests")
-struct FluentOrdersTests {
+@Suite("FluentWalletOrders Tests")
+struct FluentWalletOrdersTests {
     let test = ArrayTestDatabase()
 
     @Test("Order Concrete Model")

@@ -17,7 +17,7 @@ public protocol PassDataModel: Model {
     ///
     /// - Parameter db: The SQL database to query against.
     ///
-    /// - Returns: An object that conforms to ``PassJSON/Properties``.
+    /// - Returns: An object that conforms to `PassJSON.Properties`.
     ///
     /// > Tip: See the [`Pass`](https://developer.apple.com/documentation/walletpasses/pass) object to understand the keys.
     func passJSON(on db: any Database) async throws -> any PassJSON.Properties
@@ -39,14 +39,14 @@ public protocol PassDataModel: Model {
     /// Create the personalization JSON struct.
     ///
     /// This method should generate the entire personalization JSON struct.
-    /// If the pass in question requires personalization, you should return a ``PersonalizationJSON``.
+    /// If the pass in question requires personalization, you should return a `PersonalizationJSON`.
     /// If the pass does not require personalization, you should return `nil`.
     ///
     /// The default implementation of this method returns `nil`.
     ///
     /// - Parameter db: The SQL database to query against.
     ///
-    /// - Returns: A ``PersonalizationJSON`` or `nil` if the pass does not require personalization.
+    /// - Returns: A `PersonalizationJSON` or `nil` if the pass does not require personalization.
     func personalizationJSON(on db: any Database) async throws -> PersonalizationJSON?
 }
 
