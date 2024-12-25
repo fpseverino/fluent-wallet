@@ -34,7 +34,7 @@ let package = Package(
             name: "FluentPasses",
             dependencies: [
                 .target(name: "FluentWallet"),
-                .product(name: "Passes", package: "swift-wallet"),
+                .product(name: "WalletPasses", package: "swift-wallet"),
             ],
             swiftSettings: swiftSettings
         ),
@@ -50,7 +50,7 @@ let package = Package(
             name: "FluentOrders",
             dependencies: [
                 .target(name: "FluentWallet"),
-                .product(name: "Orders", package: "swift-wallet"),
+                .product(name: "WalletOrders", package: "swift-wallet"),
             ],
             swiftSettings: swiftSettings
         ),

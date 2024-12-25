@@ -1,5 +1,5 @@
 import FluentKit
-import Passes
+import WalletPasses
 
 /// Represents the `Model` that stores custom app data associated to Apple Wallet passes.
 public protocol PassDataModel: Model {

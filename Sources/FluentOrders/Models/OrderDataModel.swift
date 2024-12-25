@@ -1,5 +1,5 @@
 import FluentKit
-import Orders
+import WalletOrders
 
 /// Represents the `Model` that stores custom app data associated to Wallet orders.
 public protocol OrderDataModel: Model {
