@@ -37,6 +37,7 @@ final public class Order: OrderModel, @unchecked Sendable {
     }
 }
 
+/// The migration that creates the ``Order`` table.
 public struct CreateOrder: AsyncMigration {
     public func prepare(on database: any Database) async throws {
         try await database.schema(Order.FieldKeys.schemaName)

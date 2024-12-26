@@ -24,6 +24,7 @@ final public class Device: DeviceModel, @unchecked Sendable {
     public init() {}
 }
 
+/// The migration that creates the ``Device`` table.
 public struct CreateDevice: AsyncMigration {
     public func prepare(on database: any Database) async throws {
         try await database.schema(Device.FieldKeys.schemaName)

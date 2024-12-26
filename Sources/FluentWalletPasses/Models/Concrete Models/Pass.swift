@@ -35,6 +35,7 @@ final public class Pass: PassModel, @unchecked Sendable {
     }
 }
 
+/// The migration that creates the ``Pass`` table.
 public struct CreatePass: AsyncMigration {
     public func prepare(on database: any Database) async throws {
         try await database.schema(Pass.FieldKeys.schemaName)

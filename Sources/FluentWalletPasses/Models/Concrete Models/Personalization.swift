@@ -50,6 +50,7 @@ final public class Personalization: PersonalizationModel, @unchecked Sendable {
     public init() {}
 }
 
+/// The migration that creates the ``Personalization`` table.
 public struct CreatePersonalization: AsyncMigration {
     public func prepare(on database: any Database) async throws {
         try await database.schema(Personalization.FieldKeys.schemaName)

@@ -19,6 +19,7 @@ final public class LogEntry: LogEntryModel, @unchecked Sendable {
     public init() {}
 }
 
+/// The migration that creates the ``LogEntry`` table.
 public struct CreateLogEntry: AsyncMigration {
     public func prepare(on database: any Database) async throws {
         try await database.schema(LogEntry.FieldKeys.schemaName)

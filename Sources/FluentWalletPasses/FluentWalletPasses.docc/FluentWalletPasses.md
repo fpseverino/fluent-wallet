@@ -13,16 +13,20 @@ This package provides a collection of Fluent protocol and concrete models, usefu
 - ``PassDataModel``
 - ``PassModel``
 - ``PassesRegistrationModel``
-- ``PersonalizationModel``
 
 ### Concrete Models
 
 - ``Pass``
 - ``PassesRegistration``
-- ``Personalization``
 
 ### Migrations
 
 - ``CreatePass``
 - ``CreatePassesRegistration``
+
+### Personalized Passes
+
+- <doc:PersonalizedPasses>
+- ``PersonalizationModel``
+- ``Personalization``
 - ``CreatePersonalization``

@@ -20,6 +20,7 @@ final public class PassesRegistration: PassesRegistrationModel, @unchecked Senda
     public init() {}
 }
 
+/// The migration that creates the ``PassesRegistration`` table.
 public struct CreatePassesRegistration: AsyncMigration {
     public func prepare(on database: any Database) async throws {
         try await database.schema(PassesRegistration.FieldKeys.schemaName)
