@@ -70,7 +70,7 @@ extension PassData {
 
 ### Implement the Web Service
 
-After implementing the data model methods, there is nothing else you have to do.
+After implementing the data model methods, you have to implement the web service that will handle the personalization.
 
 Build the pass bundle with a `PassBuilder` as usual and distribute it.
 The user will be prompted to provide the required personal information when they add the pass.
