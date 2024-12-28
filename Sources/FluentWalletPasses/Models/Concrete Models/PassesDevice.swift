@@ -44,7 +44,7 @@ public struct CreatePassesDevice: AsyncMigration {
 
 extension PassesDevice {
     package enum FieldKeys {
-        package static let schemaName = "devices"
+        package static let schemaName = "passes_devices"
         static let pushToken = FieldKey(stringLiteral: "push_token")
         static let libraryIdentifier = FieldKey(stringLiteral: "library_identifier")
     }
