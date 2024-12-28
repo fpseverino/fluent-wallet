@@ -1,19 +1,19 @@
 import FluentKit
 
-/// The `Model` that stores Apple Wallet devices.
-final public class Device: DeviceModel, @unchecked Sendable {
+/// The `Model` that stores Apple Wallet passes devices.
+final public class PassesDevice: DeviceModel, @unchecked Sendable {
     /// The schema name of the device model.
-    public static let schema = Device.FieldKeys.schemaName
+    public static let schema = PassesDevice.FieldKeys.schemaName
 
     @ID(custom: .id)
     public var id: Int?
 
     /// The push token used for sending updates to the device.
-    @Field(key: Device.FieldKeys.pushToken)
+    @Field(key: PassesDevice.FieldKeys.pushToken)
     public var pushToken: String
 
     /// The identifier Apple Wallet provides for the device.
-    @Field(key: Device.FieldKeys.libraryIdentifier)
+    @Field(key: PassesDevice.FieldKeys.libraryIdentifier)
     public var libraryIdentifier: String
 
     public init(libraryIdentifier: String, pushToken: String) {
@@ -24,25 +24,25 @@ final public class Device: DeviceModel, @unchecked Sendable {
     public init() {}
 }
 
-/// The migration that creates the ``Device`` table.
-public struct CreateDevice: AsyncMigration {
+/// The migration that creates the ``PassesDevice`` table.
+public struct CreatePassesDevice: AsyncMigration {
     public func prepare(on database: any Database) async throws {
-        try await database.schema(Device.FieldKeys.schemaName)
+        try await database.schema(PassesDevice.FieldKeys.schemaName)
             .field(.id, .int, .identifier(auto: true))
-            .field(Device.FieldKeys.pushToken, .string, .required)
-            .field(Device.FieldKeys.libraryIdentifier, .string, .required)
-            .unique(on: Device.FieldKeys.pushToken, Device.FieldKeys.libraryIdentifier)
+            .field(PassesDevice.FieldKeys.pushToken, .string, .required)
+            .field(PassesDevice.FieldKeys.libraryIdentifier, .string, .required)
+            .unique(on: PassesDevice.FieldKeys.pushToken, PassesDevice.FieldKeys.libraryIdentifier)
             .create()
     }
 
     public func revert(on database: any Database) async throws {
-        try await database.schema(Device.FieldKeys.schemaName).delete()
+        try await database.schema(PassesDevice.FieldKeys.schemaName).delete()
     }
 
     public init() {}
 }
 
-extension Device {
+extension PassesDevice {
     package enum FieldKeys {
         package static let schemaName = "devices"
         static let pushToken = FieldKey(stringLiteral: "push_token")

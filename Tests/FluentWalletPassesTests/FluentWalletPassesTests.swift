@@ -28,12 +28,31 @@ struct FluentWalletPassesTests {
         try await migration.revert(on: test.db)
     }
 
+    @Test("PassesDevice Concrete Model")
+    func passesDevice() async throws {
+        let migration = CreatePassesDevice()
+        try await migration.prepare(on: test.db)
+
+        let libraryIdentifier = "Test Library Identifier"
+        let pushToken = "Test Push Token"
+
+        test.append([
+            TestOutput(PassesDevice(libraryIdentifier: libraryIdentifier, pushToken: pushToken))
+        ])
+
+        let fetchedDevice = try #require(await PassesDevice.query(on: test.db).first())
+        #expect(fetchedDevice._$libraryIdentifier.value == libraryIdentifier)
+        #expect(fetchedDevice._$pushToken.value == pushToken)
+
+        try await migration.revert(on: test.db)
+    }
+
     @Test("PassesRegistration Concrete Model")
     func passesRegistration() async throws {
         let migration = CreatePassesRegistration()
         try await migration.prepare(on: test.db)
 
-        let device = Device()
+        let device = PassesDevice()
         device._$id.value = 1
 
         let pass = Pass()
@@ -105,7 +124,7 @@ struct FluentWalletPassesTests {
 
         let libraryIdentifier = "Test Library Identifier"
         let pushToken = "Test Push Token"
-        let device = Device(libraryIdentifier: libraryIdentifier, pushToken: pushToken)
+        let device = PassesDevice(libraryIdentifier: libraryIdentifier, pushToken: pushToken)
         device._$id.value = 1
 
         let typeIdentifier = "Test Type Identifier"

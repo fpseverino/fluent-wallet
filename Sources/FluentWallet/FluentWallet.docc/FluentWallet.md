@@ -13,20 +13,3 @@ This package provides a collection of Fluent protocol and concrete models, usefu
     }
     @Column(size: 2) { }
 }
-
-## Topics
-
-### Models
-
-- ``DeviceModel``
-- ``LogEntryModel``
-
-### Concrete Models
-
-- ``Device``
-- ``LogEntry``
-
-### Migrations
-
-- ``CreateDevice``
-- ``CreateLogEntry``

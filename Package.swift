@@ -22,14 +22,6 @@ let package = Package(
             ],
             swiftSettings: swiftSettings
         ),
-        .testTarget(
-            name: "FluentWalletTests",
-            dependencies: [
-                .target(name: "FluentWallet"),
-                .product(name: "XCTFluent", package: "fluent-kit"),
-            ],
-            swiftSettings: swiftSettings
-        ),
         .target(
             name: "FluentWalletPasses",
             dependencies: [

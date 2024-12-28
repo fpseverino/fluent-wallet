@@ -27,12 +27,31 @@ struct FluentWalletOrdersTests {
         try await migration.revert(on: test.db)
     }
 
+    @Test("OrdersDevice Concrete Model")
+    func ordersDevice() async throws {
+        let migration = CreateOrdersDevice()
+        try await migration.prepare(on: test.db)
+
+        let libraryIdentifier = "Test Library Identifier"
+        let pushToken = "Test Push Token"
+
+        test.append([
+            TestOutput(OrdersDevice(libraryIdentifier: libraryIdentifier, pushToken: pushToken))
+        ])
+
+        let fetchedDevice = try #require(await OrdersDevice.query(on: test.db).first())
+        #expect(fetchedDevice._$libraryIdentifier.value == libraryIdentifier)
+        #expect(fetchedDevice._$pushToken.value == pushToken)
+
+        try await migration.revert(on: test.db)
+    }
+
     @Test("OrdersRegistration Concrete Model")
     func ordersRegistration() async throws {
         let migration = CreateOrdersRegistration()
         try await migration.prepare(on: test.db)
 
-        let device = Device()
+        let device = OrdersDevice()
         device._$id.value = 1
 
         let order = Order()
@@ -59,7 +78,7 @@ struct FluentWalletOrdersTests {
 
         let libraryIdentifier = "Test Library Identifier"
         let pushToken = "Test Push Token"
-        let device = Device(libraryIdentifier: libraryIdentifier, pushToken: pushToken)
+        let device = OrdersDevice(libraryIdentifier: libraryIdentifier, pushToken: pushToken)
         device._$id.value = 1
 
         let typeIdentifier = "Test Type Identifier"

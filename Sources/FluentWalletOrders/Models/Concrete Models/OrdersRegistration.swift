@@ -11,7 +11,7 @@ final public class OrdersRegistration: OrdersRegistrationModel, @unchecked Senda
 
     /// The device for this registration.
     @Parent(key: OrdersRegistration.FieldKeys.deviceID)
-    public var device: Device
+    public var device: OrdersDevice
 
     /// The order for this registration.
     @Parent(key: OrdersRegistration.FieldKeys.orderID)
@@ -27,7 +27,7 @@ public struct CreateOrdersRegistration: AsyncMigration {
             .field(.id, .int, .identifier(auto: true))
             .field(
                 OrdersRegistration.FieldKeys.deviceID, .int, .required,
-                .references(Device.FieldKeys.schemaName, .id, onDelete: .cascade)
+                .references(OrdersDevice.FieldKeys.schemaName, .id, onDelete: .cascade)
             )
             .field(
                 OrdersRegistration.FieldKeys.orderID, .uuid, .required,

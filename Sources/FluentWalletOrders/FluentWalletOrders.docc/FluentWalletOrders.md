@@ -19,9 +19,11 @@ For information on Apple Wallet orders, see the [Apple Developer Documentation](
 ### Concrete Models
 
 - ``Order``
+- ``OrdersDevice``
 - ``OrdersRegistration``
 
 ### Migrations
 
 - ``CreateOrder``
+- ``CreateOrdersDevice``
 - ``CreateOrdersRegistration``

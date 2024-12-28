@@ -11,7 +11,7 @@ final public class PassesRegistration: PassesRegistrationModel, @unchecked Senda
 
     /// The device for this registration.
     @Parent(key: PassesRegistration.FieldKeys.deviceID)
-    public var device: Device
+    public var device: PassesDevice
 
     /// The pass for this registration.
     @Parent(key: PassesRegistration.FieldKeys.passID)
@@ -27,7 +27,7 @@ public struct CreatePassesRegistration: AsyncMigration {
             .field(.id, .int, .identifier(auto: true))
             .field(
                 PassesRegistration.FieldKeys.deviceID, .int, .required,
-                .references(Device.FieldKeys.schemaName, .id, onDelete: .cascade)
+                .references(PassesDevice.FieldKeys.schemaName, .id, onDelete: .cascade)
             )
             .field(
                 PassesRegistration.FieldKeys.passID, .uuid, .required,

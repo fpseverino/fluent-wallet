@@ -27,11 +27,13 @@ For information on Apple Wallet passes, see the [Apple Developer Documentation](
 ### Concrete Models
 
 - ``Pass``
+- ``PassesDevice``
 - ``PassesRegistration``
 
 ### Migrations
 
 - ``CreatePass``
+- ``CreatePassesDevice``
 - ``CreatePassesRegistration``
 
 ### Personalized Passes
