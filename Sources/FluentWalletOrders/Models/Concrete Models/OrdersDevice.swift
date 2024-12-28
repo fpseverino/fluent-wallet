@@ -1,6 +1,6 @@
 import FluentKit
 
-/// The `Model` that stores Apple Wallet passes devices.
+/// The `Model` that stores Apple Wallet orders devices.
 final public class OrdersDevice: DeviceModel, @unchecked Sendable {
     /// The schema name of the device model.
     public static let schema = OrdersDevice.FieldKeys.schemaName
