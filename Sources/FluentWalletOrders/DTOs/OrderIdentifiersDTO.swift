@@ -3,7 +3,7 @@ import struct Foundation.Date
 /// The unique identifiers associated with orders.
 ///
 /// See: [`OrderIdentifiers`](https://developer.apple.com/documentation/walletorders/orderidentifiers)
-public struct OrderIdentifiersDTO: Codable {
+public struct OrderIdentifiersDTO: Codable, Sendable {
     /// An array of order identifer strings.
     public let orderIdentifiers: [String]
 

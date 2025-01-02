@@ -1,7 +1,7 @@
 /// An object that contains the information you use to personalize a pass.
 ///
 /// See: [`PersonalizationDictionary`](https://developer.apple.com/documentation/walletpasses/personalizationdictionary)
-public struct PersonalizationDictionaryDTO: Codable {
+public struct PersonalizationDictionaryDTO: Codable, Sendable {
     /// The personalization token for this request. The server must sign and return the token.
     public let personalizationToken: String
 
@@ -19,7 +19,7 @@ public struct PersonalizationDictionaryDTO: Codable {
     /// An object that contains the user-entered information for a personalized pass.
     ///
     /// See: [`RequiredPersonalizationInfo`](https://developer.apple.com/documentation/walletpasses/personalizationdictionary/requiredpersonalizationinfo-data.dictionary)
-    public struct RequiredPersonalizationInfo: Codable {
+    public struct RequiredPersonalizationInfo: Codable, Sendable {
         /// The user-entered email address for the user of the personalized pass.
         public let emailAddress: String?
 
