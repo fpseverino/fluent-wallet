@@ -1,8 +1,7 @@
 import FluentWalletOrders
+import Foundation
 import Testing
 import XCTFluent
-
-import struct Foundation.UUID
 
 @Suite("FluentWalletOrders Tests")
 struct FluentWalletOrdersTests {
@@ -106,5 +105,14 @@ struct FluentWalletOrdersTests {
         #expect(fetchedOrdersRegistration._$order.id == order.id)
 
         try await migration.revert(on: test.db)
+    }
+
+    @Test("OrderIdentifiersDTO")
+    func orderIdentifiersDTO() {
+        let orderIdentifiers = ["Test Order Identifier"]
+        let maxDate = Date.now
+        let orderIdentifiersDTO = OrderIdentifiersDTO(with: orderIdentifiers, maxDate: maxDate)
+        #expect(orderIdentifiersDTO.orderIdentifiers == orderIdentifiers)
+        #expect(orderIdentifiersDTO.lastModified == String(maxDate.timeIntervalSince1970))
     }
 }

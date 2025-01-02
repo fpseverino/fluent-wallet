@@ -1,8 +1,7 @@
 import FluentWalletPasses
+import Foundation
 import Testing
 import XCTFluent
-
-import struct Foundation.UUID
 
 @Suite("FluentWalletPasses Tests")
 struct FluentWalletPassesTests {
@@ -153,5 +152,62 @@ struct FluentWalletPassesTests {
         #expect(fetchedPassesRegistration._$pass.id == pass.id)
 
         try await migration.revert(on: test.db)
+    }
+
+    @Test("SerialNumbersDTO")
+    func serialNumbersDTO() {
+        let serialNumbers = ["Test Serial Number 1", "Test Serial Number 2"]
+        let maxDate = Date.now
+        let serialNumbersDTO = SerialNumbersDTO(with: serialNumbers, maxDate: maxDate)
+        #expect(serialNumbersDTO.lastUpdated == String(maxDate.timeIntervalSince1970))
+        #expect(serialNumbersDTO.serialNumbers == serialNumbers)
+    }
+
+    @Test("PersonalizationDictionaryDTO")
+    func personalizationDictionaryDTO() throws {
+        let personalizationToken = "Test Personalization Token"
+        let requiredPersonalizationInfo = PersonalizationDictionaryDTO.RequiredPersonalizationInfo(
+            emailAddress: "Test Email Address",
+            familyName: "Test Family Name",
+            fullName: "Test Full Name",
+            givenName: "Test Given Name",
+            isoCountryCode: "Test ISO Country Code",
+            phoneNumber: "Test Phone Number",
+            postalCode: "Test Postal Code"
+        )
+        let personalizationDictionaryDTO = PersonalizationDictionaryDTO(
+            personalizationToken: personalizationToken,
+            requiredPersonalizationInfo: requiredPersonalizationInfo
+        )
+        #expect(personalizationDictionaryDTO.personalizationToken == personalizationToken)
+        #expect(personalizationDictionaryDTO.requiredPersonalizationInfo.emailAddress == requiredPersonalizationInfo.emailAddress)
+        #expect(personalizationDictionaryDTO.requiredPersonalizationInfo.familyName == requiredPersonalizationInfo.familyName)
+        #expect(personalizationDictionaryDTO.requiredPersonalizationInfo.fullName == requiredPersonalizationInfo.fullName)
+        #expect(personalizationDictionaryDTO.requiredPersonalizationInfo.givenName == requiredPersonalizationInfo.givenName)
+        #expect(personalizationDictionaryDTO.requiredPersonalizationInfo.isoCountryCode == requiredPersonalizationInfo.isoCountryCode)
+        #expect(personalizationDictionaryDTO.requiredPersonalizationInfo.phoneNumber == requiredPersonalizationInfo.phoneNumber)
+        #expect(personalizationDictionaryDTO.requiredPersonalizationInfo.postalCode == requiredPersonalizationInfo.postalCode)
+
+        // Test `PersonalizationDictionaryDTO.RequiredPersonalizationInfo` `CodingKeys`
+        let encoded = try JSONEncoder().encode(requiredPersonalizationInfo)
+        let jsonString = String(data: encoded, encoding: .utf8)!
+        #expect(jsonString.contains("ISOCountryCode"))
+        #expect(!jsonString.contains("isoCountryCode"))
+        let decoded = try JSONDecoder().decode(PersonalizationDictionaryDTO.RequiredPersonalizationInfo.self, from: encoded)
+        #expect(decoded.isoCountryCode == requiredPersonalizationInfo.isoCountryCode)
+    }
+
+    @Test("PushTokenDTO")
+    func pushTokenDTO() {
+        let pushToken = "Test Push Token"
+        let pushTokenDTO = PushTokenDTO(pushToken: pushToken)
+        #expect(pushTokenDTO.pushToken == pushToken)
+    }
+
+    @Test("LogEntriesDTO")
+    func logEntriesDTO() {
+        let logEntries = ["Test Log Entry 1", "Test Log Entry 2"]
+        let logEntriesDTO = LogEntriesDTO(logs: logEntries)
+        #expect(logEntriesDTO.logs == logEntries)
     }
 }
