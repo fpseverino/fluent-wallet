@@ -12,7 +12,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/fluent-kit.git", from: "1.49.0"),
-        .package(url: "https://github.com/fpseverino/swift-wallet.git", from: "0.2.0"),
+        .package(url: "https://github.com/fpseverino/swift-wallet.git", from: "0.3.0"),
     ],
     targets: [
         .target(
@@ -22,6 +22,7 @@ let package = Package(
             ],
             swiftSettings: swiftSettings
         ),
+        // MARK: - Wallet Passes
         .target(
             name: "FluentWalletPasses",
             dependencies: [
@@ -38,6 +39,7 @@ let package = Package(
             ],
             swiftSettings: swiftSettings
         ),
+        // MARK: - Wallet Orders
         .target(
             name: "FluentWalletOrders",
             dependencies: [

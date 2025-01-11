@@ -36,9 +36,14 @@ For information on Apple Wallet passes, see the [Apple Developer Documentation](
 - ``CreatePassesDevice``
 - ``CreatePassesRegistration``
 
+### DTOs
+
+- ``SerialNumbersDTO``
+
 ### Personalized Passes
 
 - <doc:PersonalizedPasses>
 - ``PersonalizationModel``
 - ``Personalization``
 - ``CreatePersonalization``
+- ``PersonalizationDictionaryDTO``

@@ -23,6 +23,7 @@ struct FluentWalletPassesTests {
         let fetchedPass = try #require(await Pass.query(on: test.db).first())
         #expect(fetchedPass._$typeIdentifier.value == typeIdentifier)
         #expect(fetchedPass._$authenticationToken.value == authenticationToken)
+        #expect(fetchedPass._$updatedAt.value != nil)
 
         try await migration.revert(on: test.db)
     }
@@ -112,6 +113,7 @@ struct FluentWalletPassesTests {
         #expect(fetchedPersonalization._$postalCode.value == postalCode)
         #expect(fetchedPersonalization._$isoCountryCode.value == isoCountryCode)
         #expect(fetchedPersonalization._$phoneNumber.value == phoneNumber)
+        #expect(fetchedPersonalization._$id != nil)
 
         try await migration.revert(on: test.db)
     }

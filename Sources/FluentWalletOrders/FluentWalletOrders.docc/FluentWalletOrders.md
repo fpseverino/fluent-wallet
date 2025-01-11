@@ -27,3 +27,7 @@ For information on Apple Wallet orders, see the [Apple Developer Documentation](
 - ``CreateOrder``
 - ``CreateOrdersDevice``
 - ``CreateOrdersRegistration``
+
+### DTOs
+
+- ``OrderIdentifiersDTO``

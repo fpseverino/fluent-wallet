@@ -22,6 +22,9 @@ struct FluentWalletOrdersTests {
         let fetchedOrder = try #require(await Order.query(on: test.db).first())
         #expect(fetchedOrder._$typeIdentifier.value == typeIdentifier)
         #expect(fetchedOrder._$authenticationToken.value == authenticationToken)
+        #expect(fetchedOrder._$createdAt.value != nil)
+        #expect(fetchedOrder._$updatedAt.value != nil)
+        #expect(fetchedOrder._$id != nil)
 
         try await migration.revert(on: test.db)
     }
