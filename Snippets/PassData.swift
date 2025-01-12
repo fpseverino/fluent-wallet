@@ -79,41 +79,41 @@ extension PassData {
 
 // snippet.PASS_JSON_DATA
 struct PassJSONData: PassJSON.Properties {
-    let formatVersion = PassJSON.FormatVersion.v1
-    let organizationName = "example"
-    let teamIdentifier = "DEF123GHIJ"  // You should keep this value secret
-    let webServiceURL = "https://example.com/api/passes/"
-    let logoText = "Example"
-    let sharingProhibited = true
-    let backgroundColor = "rgb(207, 77, 243)"
-    let foregroundColor = "rgb(255, 255, 255)"
+    var formatVersion = PassJSON.FormatVersion.v1
+    var organizationName = "example"
+    var teamIdentifier = "DEF123GHIJ"  // You should keep this value secret
+    var webServiceURL = "https://example.com/api/passes/"
+    var logoText = "Example"
+    var sharingProhibited = true
+    var backgroundColor = "rgb(207, 77, 243)"
+    var foregroundColor = "rgb(255, 255, 255)"
 
-    let passTypeIdentifier = PassData.typeIdentifier
+    var passTypeIdentifier = PassData.typeIdentifier
 
-    let description: String
-    let serialNumber: String
-    let authenticationToken: String
+    var description: String
+    var serialNumber: String
+    var authenticationToken: String
 
-    let barcodes = Barcode(message: "message")
+    var barcodes = Barcode(message: "message")
     struct Barcode: PassJSON.Barcodes {
-        let format = PassJSON.BarcodeFormat.qr
-        let message: String
-        let messageEncoding = "iso-8859-1"
+        var format = PassJSON.BarcodeFormat.qr
+        var message: String
+        var messageEncoding = "iso-8859-1"
     }
 
     let boardingPass = Boarding(transitType: .air)
     struct Boarding: PassJSON.BoardingPass {
-        let transitType: PassJSON.TransitType
-        let headerFields: [PassField]
-        let primaryFields: [PassField]
-        let secondaryFields: [PassField]
-        let auxiliaryFields: [PassField]
-        let backFields: [PassField]
+        var transitType: PassJSON.TransitType
+        var headerFields: [PassField]
+        var primaryFields: [PassField]
+        var secondaryFields: [PassField]
+        var auxiliaryFields: [PassField]
+        var backFields: [PassField]
 
         struct PassField: PassJSON.PassFieldContent {
-            let key: String
-            let label: String
-            let value: String
+            var key: String
+            var label: String
+            var value: String
         }
 
         init(transitType: PassJSON.TransitType) {
