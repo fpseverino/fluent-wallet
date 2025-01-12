@@ -28,8 +28,8 @@ If the pass requires personalization, and if it was not already personalized, cr
 
 In the ``PassDataModel/sourceFilesDirectoryPath(on:)`` method, you have to return two different directory paths, depending on whether the pass has to be personalized or not. If it does, the directory must contain the `personalizationLogo@XX.png` file.
 
-Finally, you have to implement the ``PassDataModel/passJSON(on:)`` method as usual, but remember to use in the `PassJSON.Properties` initializer the user info that will be saved inside ``Personalization`` after the pass has been personalized.
-Each ``Personalization`` instance has a reference to the pass it belongs to, so you can easily retrieve the user info for the pass.
+Finally, you have to implement the ``PassDataModel/passJSON(on:)`` method as usual, but remember to use in the `PassJSON.Properties` initializer the user info that will be saved inside ``PersonalizationInfo`` after the pass has been personalized.
+Each ``PersonalizationInfo`` instance has a reference to the pass it belongs to, so you can easily retrieve the user info for the pass.
 
 ### Implement the Web Service
 
@@ -39,12 +39,12 @@ Build the pass bundle with a `PassBuilder` as usual and distribute it.
 
 The user will be prompted to provide the required personal information when they add the pass.
 
-Wallet will then send the user personal information to your server, which should be saved in the ``Personalization`` table, along with a personalization token that you have to sign and return to Wallet in the response.
+Wallet will then send the user personal information to your server, which should be saved in the ``PersonalizationInfo`` table, along with a personalization token that you have to sign and return to Wallet in the response.
 You can use the `PassBuilder.signature(for:)` method to sign the personalization token.
 
 Immediately after that, Wallet will request the updated pass.
-This updated pass will contain the user personalization data that was previously saved inside the ``Personalization`` table.
-You can access the pass linked to the personalization data by using the ``Personalization/pass`` field.
+This updated pass will contain the user personalization data that was previously saved inside the ``PersonalizationInfo`` table.
+You can access the pass linked to the personalization data by using the ``PersonalizationInfo/pass`` field.
 
 > Important: This updated and personalized pass **must not** contain the `personalization.json` file, so make sure that the ``PassDataModel/personalizationJSON(on:)`` method returns `nil` when the pass has already been personalized.
 

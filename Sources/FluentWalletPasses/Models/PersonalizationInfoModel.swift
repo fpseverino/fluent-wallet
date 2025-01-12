@@ -1,7 +1,7 @@
 import FluentKit
 
 /// Represents the `Model` that stores user personalization info.
-public protocol PersonalizationModel: Model where IDValue == Int {
+public protocol PersonalizationInfoModel: Model where IDValue == Int {
     associatedtype PassType: PassModel
 
     /// The pass this personalization info is associated with.
@@ -36,7 +36,7 @@ public protocol PersonalizationModel: Model where IDValue == Int {
     var phoneNumber: String? { get set }
 }
 
-extension PersonalizationModel {
+extension PersonalizationInfoModel {
     public var _$id: ID<Int> {
         guard let mirror = Mirror(reflecting: self).descendant("_id"),
             let id = mirror as? ID<Int>

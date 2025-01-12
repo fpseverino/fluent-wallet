@@ -43,7 +43,7 @@ For information on Apple Wallet passes, see the [Apple Developer Documentation](
 ### Personalized Passes
 
 - <doc:PersonalizedPasses>
-- ``PersonalizationModel``
-- ``Personalization``
-- ``CreatePersonalization``
+- ``PersonalizationInfoModel``
+- ``PersonalizationInfo``
+- ``CreatePersonalizationInfo``
 - ``PersonalizationDictionaryDTO``

@@ -72,9 +72,9 @@ struct FluentWalletPassesTests {
         try await migration.revert(on: test.db)
     }
 
-    @Test("Personalization Concrete Model")
+    @Test("PersonalizationInfo Concrete Model")
     func personalization() async throws {
-        let migration = CreatePersonalization()
+        let migration = CreatePersonalizationInfo()
         try await migration.prepare(on: test.db)
 
         let typeIdentifier = "Test Type Identifier"
@@ -91,7 +91,7 @@ struct FluentWalletPassesTests {
         let isoCountryCode = "Test ISO Country Code"
         let phoneNumber = "Test Phone Number"
 
-        let personalization = Personalization()
+        let personalization = PersonalizationInfo()
         personalization.$pass.id = pass.id!
         personalization.fullName = fullName
         personalization.givenName = givenName
@@ -104,7 +104,7 @@ struct FluentWalletPassesTests {
             TestOutput(personalization)
         ])
 
-        let fetchedPersonalization = try #require(await Personalization.query(on: test.db).first())
+        let fetchedPersonalization = try #require(await PersonalizationInfo.query(on: test.db).first())
         #expect(fetchedPersonalization._$pass.id == pass.id)
         #expect(fetchedPersonalization._$fullName.value == fullName)
         #expect(fetchedPersonalization._$givenName.value == givenName)

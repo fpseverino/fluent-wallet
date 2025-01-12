@@ -60,7 +60,7 @@ extension PassData {
     func personalizationJSON(on db: any Database) async throws -> PersonalizationJSON? {
         let pass = try await self.$pass.get(on: db)
 
-        let personalization = try await Personalization.query(on: db)
+        let personalization = try await PersonalizationInfo.query(on: db)
             .filter(\.$pass.$id == pass.requireID())
             .first()
 
