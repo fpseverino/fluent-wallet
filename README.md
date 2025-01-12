@@ -17,7 +17,7 @@ This package provides a collection of Fluent protocol and concrete models, usefu
 Use the SPM string to easily include the dependendency in your `Package.swift` file
 
 ```swift
-.package(url: "https://github.com/fpseverino/fluent-wallet.git", branch: "main")
+.package(url: "https://github.com/fpseverino/fluent-wallet.git", from: "0.1.0")
 ```
 
 and add the product you want to use to your target's dependencies:
