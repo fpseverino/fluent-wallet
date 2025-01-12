@@ -33,7 +33,7 @@ struct CreateOrderData: AsyncMigration {
             .field("merchant_name", .string, .required)
             .create()
     }
-    
+
     public func revert(on database: Database) async throws {
         try await database.schema(OrderData.schema).delete()
     }
@@ -74,7 +74,7 @@ struct OrderJSONData: OrderJSON.Properties {
         var url = "https://www.example.com/"
         var logo = "pet_store_logo.png"
     }
-    
+
     init(data: OrderData, order: Order) {
         self.orderIdentifier = order.id!.uuidString
         self.authenticationToken = order.authenticationToken
