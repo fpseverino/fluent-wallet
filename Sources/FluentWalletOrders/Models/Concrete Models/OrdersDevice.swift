@@ -1,4 +1,4 @@
-import FluentKit
+public import FluentKit
 
 /// The `Model` that stores Apple Wallet orders devices.
 final public class OrdersDevice: DeviceModel, @unchecked Sendable {

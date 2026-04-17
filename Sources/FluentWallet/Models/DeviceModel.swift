@@ -1,4 +1,4 @@
-import FluentKit
+public import FluentKit
 
 /// Represents the `Model` that stores Apple Wallet devices.
 public protocol DeviceModel: Model where IDValue == Int {

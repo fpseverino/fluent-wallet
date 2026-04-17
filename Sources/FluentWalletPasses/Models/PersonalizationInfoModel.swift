@@ -1,4 +1,4 @@
-import FluentKit
+public import FluentKit
 
 /// Represents the `Model` that stores user personalization info.
 public protocol PersonalizationInfoModel: Model where IDValue == Int {

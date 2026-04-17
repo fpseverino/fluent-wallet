@@ -1,6 +1,5 @@
-import FluentKit
-import FluentWallet
-import Foundation
+public import FluentKit
+public import Foundation
 
 /// Represents the `Model` that stores Waller orders.
 ///

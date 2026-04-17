@@ -1,4 +1,4 @@
-import FluentKit
+public import FluentKit
 
 /// The `Model` that stores user personalization info.
 final public class PersonalizationInfo: PersonalizationInfoModel, @unchecked Sendable {

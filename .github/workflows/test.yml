@@ -10,6 +10,9 @@ jobs:
   unit-tests:
     uses: vapor/ci/.github/workflows/run-unit-tests.yml@main
     with:
+      with_release_mode_testing: true
       with_linting: true
+      with_musl: true
+      with_android: true
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

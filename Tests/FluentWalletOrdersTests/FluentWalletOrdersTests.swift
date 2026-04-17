@@ -1,3 +1,4 @@
+import FluentKit
 import FluentWalletOrders
 import Foundation
 import Testing
@@ -24,7 +25,6 @@ struct FluentWalletOrdersTests {
         #expect(fetchedOrder._$authenticationToken.value == authenticationToken)
         #expect(fetchedOrder._$createdAt.value != nil)
         #expect(fetchedOrder._$updatedAt.value != nil)
-        #expect(fetchedOrder._$id != nil)
 
         try await migration.revert(on: test.db)
     }

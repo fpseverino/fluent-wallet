@@ -1,3 +1,4 @@
+import FluentKit
 import FluentWalletPasses
 import Foundation
 import Testing
@@ -113,7 +114,6 @@ struct FluentWalletPassesTests {
         #expect(fetchedPersonalization._$postalCode.value == postalCode)
         #expect(fetchedPersonalization._$isoCountryCode.value == isoCountryCode)
         #expect(fetchedPersonalization._$phoneNumber.value == phoneNumber)
-        #expect(fetchedPersonalization._$id != nil)
 
         try await migration.revert(on: test.db)
     }

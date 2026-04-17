@@ -1,4 +1,4 @@
-import struct Foundation.Date
+public import struct Foundation.Date
 
 /// The unique identifiers associated with orders.
 ///

@@ -1,5 +1,4 @@
-import FluentKit
-import FluentWallet
+public import FluentKit
 
 /// The `Model` that stores passes registrations.
 final public class PassesRegistration: PassesRegistrationModel, @unchecked Sendable {

@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 import PackageDescription
 
 let package = Package(
@@ -11,8 +11,8 @@ let package = Package(
         .library(name: "FluentWalletOrders", targets: ["FluentWalletOrders"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/vapor/fluent-kit.git", from: "1.49.0"),
-        .package(url: "https://github.com/fpseverino/swift-wallet.git", from: "0.3.0"),
+        .package(url: "https://github.com/vapor/fluent-kit.git", from: "1.56.0"),
+        .package(url: "https://github.com/fpseverino/swift-wallet.git", from: "1.0.0"),
     ],
     targets: [
         .target(
@@ -61,6 +61,11 @@ let package = Package(
 
 var swiftSettings: [SwiftSetting] {
     [
-        .enableUpcomingFeature("ExistentialAny")
+        .enableUpcomingFeature("ExistentialAny"),
+        .enableUpcomingFeature("InternalImportsByDefault"),
+        .enableUpcomingFeature("MemberImportVisibility"),
+        .enableUpcomingFeature("InferIsolatedConformances"),
+        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+        .enableUpcomingFeature("ImmutableWeakCaptures"),
     ]
 }

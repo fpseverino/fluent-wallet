@@ -1,5 +1,5 @@
-import FluentKit
-import Foundation
+public import FluentKit
+public import Foundation
 
 /// The `Model` that stores Apple Wallet passes.
 ///

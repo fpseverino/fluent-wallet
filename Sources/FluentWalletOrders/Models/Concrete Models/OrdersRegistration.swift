@@ -1,5 +1,4 @@
-import FluentKit
-import FluentWallet
+public import FluentKit
 
 /// The `Model` that stores orders registrations.
 final public class OrdersRegistration: OrdersRegistrationModel, @unchecked Sendable {

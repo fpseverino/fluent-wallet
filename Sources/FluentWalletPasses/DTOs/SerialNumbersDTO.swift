@@ -1,4 +1,4 @@
-import struct Foundation.Date
+public import struct Foundation.Date
 
 /// An object that contains serial numbers for the updatable passes on a device.
 ///

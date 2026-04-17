@@ -1,4 +1,4 @@
-import FluentKit
+public import FluentKit
 
 /// The `Model` that stores Apple Wallet passes devices.
 final public class PassesDevice: DeviceModel, @unchecked Sendable {
