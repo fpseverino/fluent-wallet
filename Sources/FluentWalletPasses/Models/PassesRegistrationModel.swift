@@ -1,4 +1,5 @@
 public import FluentKit
+public import FluentWallet
 
 /// Represents the `Model` that stores passes registrations.
 public protocol PassesRegistrationModel: Model where IDValue == Int {

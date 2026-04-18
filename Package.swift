@@ -7,6 +7,7 @@ let package = Package(
         .macOS(.v13)
     ],
     products: [
+        .library(name: "FluentWallet", targets: ["FluentWallet"]),
         .library(name: "FluentWalletPasses", targets: ["FluentWalletPasses"]),
         .library(name: "FluentWalletOrders", targets: ["FluentWalletOrders"]),
     ],
@@ -34,6 +35,7 @@ let package = Package(
         .testTarget(
             name: "FluentWalletPassesTests",
             dependencies: [
+                .target(name: "FluentWallet"),
                 .target(name: "FluentWalletPasses"),
                 .product(name: "XCTFluent", package: "fluent-kit"),
             ],
@@ -51,6 +53,7 @@ let package = Package(
         .testTarget(
             name: "FluentWalletOrdersTests",
             dependencies: [
+                .target(name: "FluentWallet"),
                 .target(name: "FluentWalletOrders"),
                 .product(name: "XCTFluent", package: "fluent-kit"),
             ],
